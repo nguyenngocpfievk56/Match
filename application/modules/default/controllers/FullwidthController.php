@@ -1,5 +1,5 @@
 <?php
-class IndexController extends Zend_Controller_Action {
+class FullwidthController extends Zend_Controller_Action {
     protected function indexAction(){
         
     }
