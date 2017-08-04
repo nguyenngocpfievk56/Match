@@ -5,6 +5,7 @@
 	<base href="public/templates/default/"/>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="css/layout.css" rel="stylesheet" type="text/css" media="all">
 	<link href="css/custom.css" rel="stylesheet" type="text/css" media="all">
 </head>
@@ -22,8 +23,7 @@
         <ul class="clear">
           <li class="active"><a href="http://www.match.com">ホーム</a></li>
 					<li><a href="http://www.match.com/productlist">商品一覧</a></li>
-          <li><a href="#">新アカウント</a></li>
-          <li><a href="#">ログイン</a></li>
+          <li><a onclick="login()">ログイン</a></li>
         </ul>
         <!-- ################################################################################################ -->
       </nav>
@@ -60,6 +60,11 @@
 <!-- ################################################################################################ -->
 <!-- #############################################PHP################################################ -->
 <!-- ################################################################################################ -->
+
+<?php
+  echo $this->render("_helpers/login.phtml");
+  echo $this->render("_helpers/create_account.phtml");
+ ?>
 
 <div class="wrapper row4">
   <footer id="footer" class="hoc clear">

@@ -1,0 +1,23 @@
+#searchBox {
+  border-color:#82A800;
+  margin-bottom: 5px;
+  text-align: center;
+  border-radius: 0;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+}
+
+.login-ifame {
+  height: 220px;
+}
+
+.login-content-dialog {
+  width: 400px;
+}
+
+.create-account-ifame {
+  height: 290px;
+}

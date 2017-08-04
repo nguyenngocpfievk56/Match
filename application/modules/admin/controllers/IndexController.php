@@ -1,6 +1,6 @@
 <?php
 class Admin_IndexController extends Zend_Controller_Action {
     protected function indexAction(){
-        echo "Xin chao";
+        $this->_helper->layout->setLayout("blank_layout");
     }
 }
