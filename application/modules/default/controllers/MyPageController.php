@@ -1,6 +1,6 @@
 <?php
-class MyPageController extends Zend_Controller_Action {
+class MyPageController extends MyZend_Controller_Action {
   protected function indexAction(){
-    $this->_helper->layout->setLayout("sub_layout");
+    $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
   }
 }

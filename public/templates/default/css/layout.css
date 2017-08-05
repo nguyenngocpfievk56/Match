@@ -268,7 +268,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#82A800;}
 .blocks .overlay:hover{color:#000000;}
 .blocks .overlay:hover::after{color:inherit; background-color:rgba(255,255,255,.75);}
 
-.elements article{box-shadow:0px 2px 5px rgba(0,0,0,.1);}
+article{box-shadow:0px 2px 5px rgba(0,0,0,.1);}
 .elements .txtwrap{border-color:#82A800;}
 
 

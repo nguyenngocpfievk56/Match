@@ -1,6 +1,7 @@
 <?php
-class IndexController extends Zend_Controller_Action {
+class IndexController extends MyZend_Controller_Action {
     protected function indexAction(){
-        $this->_helper->layout->setLayout('homepage_layout');
+        $this->loadTemplate(TEMPLATE_PATH . "/default","template.ini","homepage");
+        $products = new Default_Model_Product();
     }
 }

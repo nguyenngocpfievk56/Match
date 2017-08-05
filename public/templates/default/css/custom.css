@@ -5,6 +5,22 @@
   border-radius: 0;
 }
 
+.product-name {
+  font-size: 13px;
+}
+
+.product-case {
+  height: 350px;
+}
+
+article {
+  padding: 7px;
+}
+
+article:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 iframe {
   border: none;
   width: 100%;

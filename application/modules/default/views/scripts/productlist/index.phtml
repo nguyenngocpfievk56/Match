@@ -1,7 +1,3 @@
-<!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <div class="wrapper row3">
   <main class="hoc container clear">
     <!-- main body -->
@@ -12,126 +8,19 @@
         <figure>
           <header class="heading">Gallery Title Goes Here</header>
           <ul class="nospace clear">
+            <?php
+              for ($i = 0; $i<12; $i++) :
+            ?>
             <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
+              <article class="product-case"><a href="<?php echo $this->baseUrl("productbrowser/index/id/" . $this->productData[$i]['id']); ?>">
+                <img src="<?php echo $this->productData[$i][img]; ?>"></a>
                 <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
+                  <h6 class="heading product-name"><?php echo $this->productData[$i]["name"]; ?></h6>
+                  <footer><a href="<?php echo $this->baseUrl("productbrowser/index/id/" . $this->productData[$i]['id']); ?>">Read More &raquo;</a></footer>
                 </div>
               </article>
             </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
-            <li class="one_quarter">
-              <article><a href="http://www.match.com/productbrowser"><img src="images/320x220.png" alt=""></a>
-                <div class="txtwrap">
-                  <h6 class="heading">Malesuada posuere</h6>
-                  <time datetime="2045-04-06">6<sup>th</sup> April 2045</time>
-                  <p>Ante pulvinar hendrerit ipsum ut scelerisque sapien purus sit amet&hellip;</p>
-                  <footer><a href="http://www.match.com/productbrowser">Read More &raquo;</a></footer>
-                </div>
-              </article>
-            </li>
+            <?php endfor; ?>
           </ul>
         </figure>
       </div>
