@@ -1,0 +1,24 @@
+<div class="wrapper overlay">
+  <header id="header" class="hoc clear">
+    <nav id="mainav" class="clear">
+      <!-- ################################################################################################ -->
+      <ul class="clear">
+        <li class="active"><a href="http://www.match.com">ホーム</a></li>
+        <li><a href="http://www.match.com/productlist">商品一覧</a></li>
+        <?php if ($this->loggedIn): ?>
+          <li><a href="http://www.match.com/profile">プロフィール</a></li>
+          <li><a href="http://www.match.com/login/logout">ログアウト</a></li>
+        <?php else: ?>
+          <li><a href="#" onclick="login()">ログイン</a></li>
+        <?php endif; ?>
+      </ul>
+      <!-- ################################################################################################ -->
+    </nav>
+    <div id="logo">
+      <!-- ################################################################################################ -->
+      <h1><a href="http://www.match.com/">Match</a></h1>
+      <p>find anything you think about</p>
+      <!-- ################################################################################################ -->
+    </div>
+  </header>
+</div>

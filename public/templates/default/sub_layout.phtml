@@ -15,25 +15,7 @@
 <!-- Top Background Image Wrapper -->
 <div class="bgded" style="background-image:url('<?php echo $this->imgUrl; ?>/backgrounds/01.png');">
   <!-- ################################################################################################ -->
-  <div class="wrapper overlay">
-    <header id="header" class="hoc clear">
-      <nav id="mainav" class="clear">
-        <!-- ################################################################################################ -->
-        <ul class="clear">
-          <li class="active"><a href="http://www.match.com">ホーム</a></li>
-					<li><a href="http://www.match.com/productlist">商品一覧</a></li>
-          <li><a onclick="login()">ログイン</a></li>
-        </ul>
-        <!-- ################################################################################################ -->
-      </nav>
-			<div id="logo">
-				<!-- ################################################################################################ -->
-				<h1><a href="http://www.match.com/">Match</a></h1>
-				<p>find anything you think about</p>
-				<!-- ################################################################################################ -->
-			</div>
-		</header>
-  </div>
+  <?php echo $this->render("helpers/menu.phtml") ?>
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
@@ -61,8 +43,8 @@
 <!-- ################################################################################################ -->
 
 <?php
-  echo $this->render("_helpers/login.phtml");
-  echo $this->render("_helpers/create_account.phtml");
+  echo $this->render("helpers/login.phtml");
+  echo $this->render("helpers/create_account.phtml");
  ?>
 
 <?php echo $this->render("helpers/footer.phtml") ?>

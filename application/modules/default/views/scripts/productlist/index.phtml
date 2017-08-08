@@ -2,7 +2,20 @@
   <main class="hoc container clear">
     <!-- main body -->
     <!-- ################################################################################################ -->
-    <div class="content">
+    <div class="sidebar one_quarter first">
+      <!-- ################################################################################################ -->
+      <h6>カテゴリー</h6>
+      <nav class="sdb_holder">
+        <ul>
+          <?php for($i=0; $i<sizeof($this->categoriesData); $i++): ?>
+            <li><a href="#"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
+          <?php endfor; ?>
+        </ul>
+      </nav>
+      <!-- ################################################################################################ -->
+    </div>
+
+    <div class="content three_quarter">
       <!-- ################################################################################################ -->
       <div id="gallery">
         <figure>
@@ -11,7 +24,7 @@
             <?php
               for ($i = 0; $i<12; $i++) :
             ?>
-            <li class="one_quarter">
+            <li class="one_third">
               <article class="product-case"><a href="<?php echo $this->baseUrl("productbrowser/index/id/" . $this->productData[$i]['id']); ?>">
                 <img src="<?php echo $this->productData[$i][img]; ?>"></a>
                 <div class="txtwrap">

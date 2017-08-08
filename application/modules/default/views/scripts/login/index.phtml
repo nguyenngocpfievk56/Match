@@ -1,16 +1,17 @@
-<form>
+<form action="" method="post">
   <div class="form-group">
-    <label>Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    <label>Username</label>
+    <?php echo $this->formText('username', "", array("class"=>"form-control", "placeholder"=>"Username")) ?>
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <?php echo $this->formPassword('password', "", array("class" => "form-control", "placeholder"=>"Password")); ?>
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox">　アカウントを保存する
+      <input type="checkbox" name='remember' id='remember'>　アカウントを保存する
     </label>
   </div>
-  <button type="submit" class="btn btn-default">ログイン</button>
+  <?php echo $this->formSubmit('submit', 'ログイン', array('class'=>'btn btn-default')); ?>
+  <span class="label label-danger"><?php echo $this->notation; ?></span>
 </form>
