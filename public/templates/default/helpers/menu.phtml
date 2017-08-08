@@ -3,11 +3,11 @@
     <nav id="mainav" class="clear">
       <!-- ################################################################################################ -->
       <ul class="clear">
-        <li class="active"><a href="http://www.match.com">ホーム</a></li>
-        <li><a href="http://www.match.com/productlist">商品一覧</a></li>
+        <li class="active"><a href="<?php echo $this->baseUrl('index/index'); ?>">ホーム</a></li>
+        <li><a href="<?php echo $this->baseUrl('product/list'); ?>">商品一覧</a></li>
         <?php if ($this->loggedIn): ?>
-          <li><a href="http://www.match.com/profile">プロフィール</a></li>
-          <li><a href="http://www.match.com/login/logout">ログアウト</a></li>
+          <li><a href="<?php echo $this->baseUrl('user/profile'); ?>">プロフィール</a></li>
+          <li><a href="<?php echo $this->baseUrl('auth/logout'); ?>">ログアウト</a></li>
         <?php else: ?>
           <li><a href="#" onclick="login()">ログイン</a></li>
         <?php endif; ?>

@@ -6,7 +6,7 @@
         <h4 class="modal-title">ログイン</h4>
       </div>
       <div class="modal-body">
-        <iframe class="login-ifame" src="http://www.match.com/login"></iframe>
+        <iframe class="login-ifame" src="<?php echo $this->baseUrl('/auth/login'); ?>"></iframe>
       </div>
       <div class="modal-footer">
         <a onclick="createAccount()">新アカウントを作る</a>

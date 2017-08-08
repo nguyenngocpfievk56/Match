@@ -1,12 +1,12 @@
 <?php
-class LoginController extends MyZend_Controller_Action {
+class AuthController extends MyZend_Controller_Action {
   protected $_arrayParams;
 
   public function init(){
     $this->_arrayParams = $this->_request->getParams();
   }
 
-  protected function indexAction(){
+  protected function loginAction(){
     $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "blank");
 
     $db = Zend_Registry::get('db');
@@ -31,11 +31,13 @@ class LoginController extends MyZend_Controller_Action {
           $omitColumns = array('password');
           $user = $authAdapter->getResultRowObject(null, $omitColumns);
           $auth->getStorage()->write($user);
+
+          MyZend_Utils_Utils::reloadMainPage();
         } else {
-          $this->view->notation = "何か間違いました、チェックしてください";
+          $this->view->error = "何か間違いました";
         }
       } else {
-        $this->view->notation = "UsernameとPasswordを入力してください";
+        $this->view->error = "UsernameとPasswordが必要です";
       }
     }
   }
@@ -43,7 +45,7 @@ class LoginController extends MyZend_Controller_Action {
   protected function logoutAction(){
     $auth = Zend_Auth::getInstance();
     $auth->clearIdentity();
-    $this->_redirect("http://www.match.com/");
+    $this->_redirect($this->view->baseUrl());
     $this->_helper->viewRenderer->setNoRender();
   }
 }

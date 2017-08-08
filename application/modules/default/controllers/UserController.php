@@ -1,13 +1,17 @@
 <?php
-class CreateAccountController extends MyZend_Controller_Action {
+class UserController extends MyZend_Controller_Action {
 
   protected $_arrayParams;
 
-  public function init() {
+  public function init(){
     $this->_arrayParams = $this->_request->getParams();
   }
 
-  protected function indexAction(){
+  protected function profileAction(){
+      $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
+  }
+
+  protected function createAccountAction(){
     $this->loadTemplate(TEMPLATE_PATH . "/default","template.ini","blank");
 
     $captchaGenerator = new MyZend_Captcha_CaptchaGenerator();
@@ -22,6 +26,7 @@ class CreateAccountController extends MyZend_Controller_Action {
       $captcha_id = $this->_arrayParams['captchaId'];
       $captchaSession = new Zend_Session_Namespace('Zend_Form_Captcha_' .  $captcha_id);
 
+      // TODO: check null for params
       if ($this->_arrayParams['password'] == $this->_arrayParams['repassword']){
         if ($captchaSession->word == $this->_arrayParams['captchaBox']){
           $userTable = new Default_Model_User();
@@ -37,5 +42,9 @@ class CreateAccountController extends MyZend_Controller_Action {
       $captchaImgPath = CAPTCHA_PATH . '/images/' . $captcha_id . $captcha->getSuffix();
       unlink($captchaImgPath);
     }
+  }
+
+  protected function updateAccountAction() {
+
   }
 }
