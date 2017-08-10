@@ -1,15 +1,33 @@
+<?php
+$user = null;
+if ($this->savedUser !== null){
+  $user = explode('|', $this->savedUser);
+}
+?>
 <form action="" method="post">
   <div class="form-group">
     <label>Username</label>
-    <?php echo $this->formText('username', "", array("class"=>"form-control", "placeholder"=>"Username")) ?>
+    <?php if ($user === null): ?>
+      <input type="text" name="username" class="form-control" placeholder="Username" value=""/>
+    <?php else: ?>
+      <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $user[0]; ?>"/>
+    <?php endif; ?>
   </div>
   <div class="form-group">
     <label>Password</label>
-    <?php echo $this->formPassword('password', "", array("class" => "form-control", "placeholder"=>"Password")); ?>
+    <?php if ($user === null): ?>
+      <input type="password" name="password" class="form-control" placeholder="Username" value=""/>
+    <?php else: ?>
+      <input type="password" name="password" class="form-control" placeholder="Username" value="<?php echo $user[1]; ?>"/>
+    <?php endif; ?>
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox" name='remember' id='remember'>　アカウントを保存する
+      <?php if ($user === null): ?>
+        <input type="checkbox" name="remember" id="remember">　アカウントを保存する
+      <?php else: ?>
+        <input type="checkbox" name="remember" id="remember" checked>　アカウントを保存する
+      <?php endif; ?>
     </label>
   </div>
   <?php echo $this->formSubmit('submit', 'ログイン', array('class'=>'btn btn-default')); ?>

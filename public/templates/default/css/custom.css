@@ -37,3 +37,27 @@ iframe {
 .create-account-ifame {
   height: 400px;
 }
+
+.form-group {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+.confirm-userinfo {
+  text-align: center;
+}
+
+.confirm-userinfo table {
+  display: inline-block;
+}
+
+.td-label {
+  font-weight: bold;
+  text-align: right;
+  padding: 5px;
+}
+
+.td-info {
+  text-align: left;
+  padding: 5px;
+}

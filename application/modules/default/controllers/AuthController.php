@@ -3,12 +3,23 @@ class AuthController extends MyZend_Controller_Action {
   protected $_arrayParams;
 
   public function init(){
+    parent::init();
+    $auth = Zend_Auth::getInstance();
+    if ($auth->hasIdentity()){
+      $this->view->loggedIn = true;
+    } else {
+      $this->view->loggedIn = false;
+    }
+
     $this->_arrayParams = $this->_request->getParams();
   }
 
   protected function loginAction(){
     $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "blank");
 
+    $this->view->savedUser = $this->_request->getCookie(USER_COOKIE, null);
+
+    $this->view->params = $this->_arrayParams;
     $db = Zend_Registry::get('db');
 
     $auth = Zend_Auth::getInstance();
@@ -24,13 +35,17 @@ class AuthController extends MyZend_Controller_Action {
         $remember = $this->_arrayParams['remember'];
 
         $authAdapter->setIdentity($username);
-        $authAdapter->setCredential($password);
+        $authAdapter->setCredential(md5($password));
 
         $result = $auth->authenticate($authAdapter);
         if ($result->isValid()){
           $omitColumns = array('password');
           $user = $authAdapter->getResultRowObject(null, $omitColumns);
           $auth->getStorage()->write($user);
+
+          if ($this->_request->getParam('remember') == 'on'){
+            setcookie(USER_COOKIE, $username . '|' . $password, time() + 86400);
+          }
 
           MyZend_Utils_Utils::reloadMainPage();
         } else {

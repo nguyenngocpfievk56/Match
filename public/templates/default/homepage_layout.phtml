@@ -1,18 +1,17 @@
 <?php echo $this->doctype();?>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<?php echo $this->headTitle(); ?>
-	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<?php echo $this->headLink(); ?>
-	<?php echo $this->headScript(); ?>
 </head>
 <body id="top">
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- Top Background Image Wrapper -->
-<div class="bgded" style="background-image:url('<?php echo $this->imgUrl; ?>/backgrounds/01.png');">
+<div class="bgded" style="background-image:url('<?php echo $this->imgUrl; ?>/backgrounds/01.jpg');">
   <!-- ################################################################################################ -->
   <?php echo $this->render("helpers/menu.phtml") ?>
   <!-- ################################################################################################ -->
@@ -23,7 +22,7 @@
     <article>
       <div class="introtxt">
         <h2 class="heading">何を探しているの</h2>
-				<form class="" action="http://www.match.com/productlist" method="post">
+				<form class="" action="<?php $this->baseUrl('/product/list') ?>" method="post">
 					<input class="btn" href="#" placeholder="ここに入力して検索を" id="searchBox" type="text"></input><br/>
 					<input class="btn" value="検索" type="submit"></input>
 				</form>

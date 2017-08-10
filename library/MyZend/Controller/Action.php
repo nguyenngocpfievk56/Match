@@ -1,8 +1,5 @@
 <?php
 class MyZend_Controller_Action extends Zend_Controller_Action {
-  public function init(){
-
-  }
 
   public function loadTemplate($templatePath, $configFile, $configSession){
     $this->view->headTitle()->set('');

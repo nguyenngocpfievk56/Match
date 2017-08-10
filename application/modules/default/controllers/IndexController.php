@@ -2,6 +2,7 @@
 class IndexController extends MyZend_Controller_Action {
 
   public function init(){
+    parent::init();
     $auth = Zend_Auth::getInstance();
     if ($auth->hasIdentity()){
       $this->view->loggedIn = true;

@@ -6,40 +6,41 @@
         <tr>
           <td>Avatar</td>
           <td>
-            <div class="form-group" style="overflow:auto; margin: 0;">
-              <img style="float: left; margin-right: 20px;" src="images/80x80.png">
-              <input type="file" value="修正"/>
-            </div>
+            <img style="float: left; margin-right: 20px;height: 80px; width: 80px; object-fit: cover;"
+                 src="<?php echo $this->baseUrl($this->user['img']);?>">
           </td>
         </tr>
         <tr>
           <td>Username</td>
-          <td>nguyen.huu.ngoc@elife.co.jp</td>
+          <td><?php echo $this->user['username'] ?></td>
         </tr>
         <tr>
-          <td>Password</td>
-          <td>
-            <label style="float: left; margin-right: 20px;">******</label>
-            <button type="button" name="button">修正</button>
-          </td>
+          <td>Email</td>
+          <td><?php echo $this->user['email'] ?></td>
         </tr>
         <tr>
           <td>名前</td>
-          <td>ゴック</td>
-        </tr>
-        <tr>
-          <td>名字</td>
-          <td>グエン　フー</td>
-        </tr>
-        <tr>
-          <td>生年月日</td>
-          <td>1993/07/02</td>
+          <td><?php echo $this->user['name'] ?></td>
         </tr>
         <tr>
           <td>性別</td>
-          <td>男</td>
+          <td><?php
+            switch ($this->user['sex']) {
+              case 0:
+                echo "男";
+                break;
+              case 1:
+                echo "女";
+                break;
+              default:
+                echo "未定";
+                break;
+            }
+          ?></td>
         </tr>
       </table>
+
+      <input class="btn" style="color: #000000;" type="submit" name="change" value="修正">
     </div>
   </section>
 </div>

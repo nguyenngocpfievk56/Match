@@ -1,0 +1,77 @@
+<?php
+  $sexData = array('Male', 'Female', 'Other');
+  $sexRadio = $this->formRadio('sex', 0, array('style'=>'margin:7px;'), $sexData, "");
+?>
+
+<?php if ($this->infor === null): ?>
+<form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Avatar</label>
+    <div class="col-sm-10">
+      <img style="height: 80px; width: 80px; object-fit: cover;" id="imgAvatar" src="<?php echo $this->baseUrl('public/templates/default/images/80x80.png') ?>" alt="">
+      <input onchange="updateAvatar(this)" type="file" name="avatar" class="form-control"
+             style="float: right; width: 250px; right: 0;">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Sex</label>
+    <div class="col-sm-10">
+      <?php echo $sexRadio ?>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" name="submit" value="ok" class="btn btn-default"/>
+      <input type="submit" name="submit" value="skip" class="btn btn-default"/>
+    </div>
+  </div>
+</form>
+<?php else: ?>
+<div class="confirm-userinfo">
+  <img style="margin: 7px; height: 80px; width: 80px; object-fit: cover;" src="<?php echo $this->infor[0]['img']; ?>" alt=""><br>
+  <table>
+    <tr>
+      <td class="td-label">Username:</td>
+      <td class="td-info"><?php echo $this->infor[0]['username']; ?></td>
+    </tr>
+    <tr>
+      <td class="td-label">Name:</td>
+      <td class="td-info"><?php echo $this->infor[0]['name']; ?></td>
+    </tr>
+    <tr>
+      <td class="td-label">Email:</td>
+      <td class="td-info"><?php echo $this->infor[0]['email']; ?></td>
+    </tr>
+    <tr>
+      <td class="td-label">Sex:</td>
+      <td class="td-info">
+      <?php
+        switch ($this->infor[0]['sex']) {
+          case 0:
+            echo "Male";
+            break;
+          case 1:
+            echo "Male";
+            break;
+          default:
+            echo "Other";
+            break;
+        }
+      ?></td>
+    </tr>
+  </table>
+</div>
+<?php endif; ?>
