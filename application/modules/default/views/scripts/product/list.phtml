@@ -1,5 +1,6 @@
 <?php
 $url = $this->baseUrl($this->arrayParams["controller"] . "/" . $this->arrayParams["action"] . "/idcat/");
+$urlLinkDetail = $this->baseUrl($this->arrayParams["controller"] . "/detail/idcat/" . $this->arrayParams["idcat"] . "/page/" . $this->arrayParams["page"] . "/id/");
 $currentCategory = null;
 ?>
 <div class="wrapper row3">
@@ -40,11 +41,11 @@ $currentCategory = null;
               for ($i = 0; $i<count($this->productData); $i++) :
             ?>
             <li class="one_third">
-              <article class="product-case"><a href="<?php echo $this->baseUrl("product/detail/id/" . $this->productData[$i]['id']); ?>">
+              <article class="product-case"><a href="<?php echo $urlLinkDetail . $this->productData[$i]['id']; ?>">
                 <img src="<?php echo $this->productData[$i][img]; ?>"></a>
                 <div class="txtwrap">
                   <h6 class="heading product-name"><?php echo $this->productData[$i]["name"]; ?></h6>
-                  <footer><a href="<?php echo $this->baseUrl("product/detail/id/" . $this->productData[$i]['id']); ?>">Read More &raquo;</a></footer>
+                  <footer><a href="<?php echo $urlLinkDetail . $this->productData[$i]['id']; ?>">Read More &raquo;</a></footer>
                 </div>
               </article>
             </li>

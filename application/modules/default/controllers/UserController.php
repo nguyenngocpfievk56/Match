@@ -13,6 +13,8 @@ class UserController extends MyZend_Controller_Action {
     }
 
     $this->_arrayParams = $this->_request->getParams();
+
+    $this->view->arrayParams = $this->_arrayParams;
   }
 
   protected function profileAction(){

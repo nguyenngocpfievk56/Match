@@ -20,11 +20,11 @@ class ProductController extends MyZend_Controller_Action {
     $this->_arrayParams = $this->_request->getParams();
 
     $this->paginatorAttr["currentPageNumber"] = $this->_request->getParam("page");
+
+    $this->view->arrayParams = $this->_arrayParams;
   }
 
   protected function listAction() {
-    $this->view->arrayParams = $this->_arrayParams;
-
     $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
     $productModel = new Default_Model_Product();
     $this->view->productData = $productModel->listItem($this->_arrayParams["idcat"],

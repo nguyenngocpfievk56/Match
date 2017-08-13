@@ -1,0 +1,22 @@
+<?php
+  $homeLink = $this->baseUrl();
+?>
+<div class="wrapper row2">
+  <div id="breadcrumb" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <ul class="sub_path">
+      <li><a style="font-size:15px; font-weight: bold;" href="<?php echo $this->baseUrl("/index") ?>">ホーム</a></li>
+      <?php
+        if ($this->arrayParams['action'] == 'profile') {
+          echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">プロフィール</a></li>';
+        } elseif ($this->arrayParams['action'] == 'detail') {
+          echo '<li><a style="font-size:15px; font-weight: bold;" href="' . $this->baseUrl('/product/list/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page']) . '">商品一覧</a></li>';
+          echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品詳細</a></li>';
+        } elseif ($this->arrayParams['controller'] == 'product'){
+          echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品一覧</a></li>';
+        }
+      ?>
+    </ul>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
