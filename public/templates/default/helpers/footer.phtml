@@ -19,7 +19,6 @@
     </div>
     <div class="one_quarter">
       <h6 class="title">Suscipit magna sed</h6>
-      <p class="btmspace-30">Varius libero molestie habitasse sed platea dictumst proin.</p>
       <form method="post" action="#">
         <fieldset>
           <legend>Newsletter:</legend>
@@ -37,13 +36,6 @@
             <h2 class="nospace font-x1"><a href="#">Scelerisque lacus </a></h2>
             <time class="font-xs block btmspace-10" datetime="2045-04-06">Friday, 6<sup>th</sup> April 2045</time>
             <p class="nospace">A metus luctus quis hendrerit sed vel elit ac mauris facilisis&hellip;</p>
-          </article>
-        </li>
-        <li>
-          <article>
-            <h2 class="nospace font-x1"><a href="#">Vehicula tortor</a></h2>
-            <time class="font-xs block btmspace-10" datetime="2045-04-05">Thirsday, 5<sup>th</sup> April 2045</time>
-            <p class="nospace">Ornare elit sed quam ultricies non rhoncus mauris ornare&hellip;</p>
           </article>
         </li>
       </ul>
@@ -65,6 +57,11 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+
+<?php
+  echo $this->render("helpers/login.phtml");
+  echo $this->render("helpers/create_account.phtml");
+ ?>
 <!-- JAVASCRIPTS -->
 <?php echo $this->headScript(); ?>
 </body>

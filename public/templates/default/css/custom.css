@@ -61,3 +61,12 @@ iframe {
   text-align: left;
   padding: 5px;
 }
+
+.product-description ul {
+  list-style-type: none;
+}
+
+.product-description .center {
+  text-align: left;
+  color: #f00;
+}

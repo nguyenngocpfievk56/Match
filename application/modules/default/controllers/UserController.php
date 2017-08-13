@@ -90,6 +90,10 @@ class UserController extends MyZend_Controller_Action {
     }
   }
 
+  public function welcomeAction(){
+    $this->loadTemplate(TEMPLATE_PATH . "/default","template.ini","blank");
+  }
+
   private function _getExtension($filename){
     $filename = strtolower($filename);
     $temp = explode('.', $filename);

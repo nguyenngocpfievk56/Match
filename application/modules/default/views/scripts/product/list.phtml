@@ -1,3 +1,7 @@
+<?php
+$url = $this->baseUrl($this->arrayParams["controller"] . "/" . $this->arrayParams["action"] . "/idcat/");
+$currentCategory = null;
+?>
 <div class="wrapper row3">
   <main class="hoc container clear">
     <!-- main body -->
@@ -7,9 +11,20 @@
       <h6>カテゴリー</h6>
       <nav class="sdb_holder">
         <ul>
-          <?php for($i=0; $i<sizeof($this->categoriesData); $i++): ?>
-            <li><a href="#"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
-          <?php endfor; ?>
+          <?php
+            for($i=0; $i<sizeof($this->categoriesData); $i++):
+              if($this->categoriesData[$i]['id'] == $this->arrayParams["idcat"]):
+                $currentCategory = $this->categoriesData[$i]['name'];
+          ?>
+                <li><a style="color:#f00;" href="<?php echo $url . $this->categoriesData[$i]['id'] . "/page/1"; ?>"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
+          <?php
+              else:
+          ?>
+                <li><a href="<?php echo $url . $this->categoriesData[$i]['id'] . "/page/1"; ?>"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
+          <?php
+              endif;
+            endfor;
+          ?>
         </ul>
       </nav>
       <!-- ################################################################################################ -->
@@ -19,10 +34,10 @@
       <!-- ################################################################################################ -->
       <div id="gallery">
         <figure>
-          <header class="heading">Gallery Title Goes Here</header>
+          <header class="heading">商品一覧 ( <?php echo $currentCategory; ?> )</header>
           <ul class="nospace clear">
             <?php
-              for ($i = 0; $i<12; $i++) :
+              for ($i = 0; $i<count($this->productData); $i++) :
             ?>
             <li class="one_third">
               <article class="product-case"><a href="<?php echo $this->baseUrl("product/detail/id/" . $this->productData[$i]['id']); ?>">
@@ -40,20 +55,9 @@
       <!-- ################################################################################################ -->
       <!-- ################################################################################################ -->
       <nav class="pagination">
-        <ul>
-          <li><a href="#">&laquo; Previous</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">6</a></li>
-          <li class="current"><strong>7</strong></li>
-          <li><a href="#">8</a></li>
-          <li><a href="#">9</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">14</a></li>
-          <li><a href="#">15</a></li>
-          <li><a href="#">Next &raquo;</a></li>
-        </ul>
+        <?php
+          echo $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array("url"=>$url . $this->arrayParams["idcat"] . "/page/"));
+        ?>
       </nav>
       <!-- ################################################################################################ -->
     </div>

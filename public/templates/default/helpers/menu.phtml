@@ -4,7 +4,7 @@
       <!-- ################################################################################################ -->
       <ul class="clear">
         <li class="active"><a href="<?php echo $this->baseUrl('index/index'); ?>">ホーム</a></li>
-        <li><a href="<?php echo $this->baseUrl('product/list'); ?>">商品一覧</a></li>
+        <li><a href="<?php echo $this->baseUrl('product/list/idcat/19/page/1'); ?>">商品一覧</a></li>
         <?php if ($this->loggedIn): ?>
           <li><a href="<?php echo $this->baseUrl('user/profile'); ?>">プロフィール</a></li>
           <li><a href="<?php echo $this->baseUrl('auth/logout'); ?>">ログアウト</a></li>
@@ -16,7 +16,7 @@
     </nav>
     <div id="logo">
       <!-- ################################################################################################ -->
-      <h1><a href="http://www.match.com/">Match</a></h1>
+      <h1><a href="<?php echo $this->baseUrl('/index'); ?>">Match</a></h1>
       <p>find anything you think about</p>
       <!-- ################################################################################################ -->
     </div>
