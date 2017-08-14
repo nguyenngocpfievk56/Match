@@ -1,0 +1,14 @@
+<li>
+  <article>
+    <header>
+      <figure class="avatar"><img style="height:32px; width:32px;object-fit:cover;" src="<?php echo $this->commentedUser['img']; ?>" alt=""></figure>
+      <address>
+      By <a><?php echo $this->commentedUser['name']; ?></a> (<?php echo $this->commentedUser['email'];?>)
+      </address>
+      <small><?php echo $this->currentComment['time']; ?></small>
+    </header>
+    <div class="comcont">
+      <p><?php echo $this->currentComment['content']; ?></p>
+    </div>
+  </article>
+</li>

@@ -17,10 +17,11 @@ class ProductController extends MyZend_Controller_Action {
       $this->view->loggedIn = false;
     }
 
+    $currentUser = $auth->getStorage()->read();
+    $this->view->currentUser = $currentUser;
+
     $this->_arrayParams = $this->_request->getParams();
-
     $this->paginatorAttr["currentPageNumber"] = $this->_request->getParam("page");
-
     $this->view->arrayParams = $this->_arrayParams;
   }
 
@@ -45,6 +46,12 @@ class ProductController extends MyZend_Controller_Action {
 
     $productModel = new Default_Model_Product();
     $this->view->productInfo = $productModel->getProductById($this->_arrayParams["id"]);
+
+    $commentModel = new Default_Model_Comment();
+    $this->view->comments = $commentModel->getCommentsByProduct($this->_arrayParams["id"]);
+
+    $userModel = new Default_Model_User();
+    $this->view->userModel = $userModel;
   }
 
   protected function recommendationAction() {

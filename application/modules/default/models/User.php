@@ -18,8 +18,13 @@ class Default_Model_User extends Zend_Db_Table {
     $this->update($params, $where);
   }
 
-  public function getUserById($id){
-    $query =  $this->select()->from('user')->where('id = ?', $id);
-    return $this->fetchAll($query)->toArray();
+  public function getUserById($id, $getAll = false){
+    if ($getAll) {
+      $query =  $this->select()->where('id = ?', $id);
+      return $this->fetchAll($query)->toArray();
+    }
+
+    $query =  $this->select()->from($this->_name, array('username', 'name', 'email', 'img', 'sex'))->where('id = ?', $id);
+    return $this->fetchRow($query)->toArray();
   }
 }

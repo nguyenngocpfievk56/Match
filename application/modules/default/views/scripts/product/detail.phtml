@@ -1,5 +1,6 @@
 <?php
-
+  $idUser = $this->currentUser->id;
+  $idProduct = $this->arrayParams['id'];
 ?>
 <div class="wrapper row3">
   <main class="hoc container clear">
@@ -20,63 +21,46 @@
 
       <div id="comments">
         <h2>Comments</h2>
-        <ul>
+        <ul id="comments-list">
+          <?php
+            foreach($this->comments as $item):
+              $commentedUser = $this->userModel->getUserById($item['idUser']);
+          ?>
           <li>
             <article>
               <header>
-                <figure class="avatar"><img src="<?php echo $this->imgUrl; ?>/avatar.png" alt=""></figure>
+                <figure class="avatar"><img style="height:32px; width:32px;object-fit:cover;" src="<?php echo $commentedUser['img']; ?>" alt=""></figure>
+                <div class="like-block">
+                  <a onclick="like(this, '<?php echo $this->baseUrl('ajax/like/id-comment/') . $items['id']; ?>',<?php echo $item['id']; ?>,$('#<?php echo 'likesTag' . $item['id'];?>'))">Likes</a>: <span id="<?php echo 'likesTag' . $item['id'];?>"><?php echo $item['likes']; ?></span>
+                </div>
                 <address>
-                By <a href="#">A Name</a>
+                By <a><?php echo $commentedUser['name']; ?></a> (<?php echo $commentedUser['email'];?>)
                 </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
+                <small><?php echo $item['time']; ?></small>
               </header>
               <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
+                <p><?php echo $item['content']; ?></p>
               </div>
             </article>
           </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="<?php echo $this->imgUrl; ?>/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="<?php echo $this->imgUrl; ?>/avatar.png" alt=""></figure>
-                <address>
-                By <a href="#">A Name</a>
-                </address>
-                <time datetime="2045-04-06T08:15+00:00">Friday, 6<sup>th</sup> April 2045 @08:15:00</time>
-              </header>
-              <div class="comcont">
-                <p>This is an example of a comment made on a post. You can either edit the comment, delete the comment or reply to the comment. Use this as a place to respond to the post or to share what you are thinking.</p>
-              </div>
-            </article>
-          </li>
+          <?php endforeach; ?>
         </ul>
 
-        <h2>Write A Comment</h2>
-        <form action="#" method="post">
-          <div class="block clear">
-            <label for="comment">Your Comment</label>
-            <textarea name="comment" id="comment" cols="25" rows="10"></textarea>
-          </div>
+        <?php if ($this->loggedIn): ?>
+          <h2>Write A Comment</h2>
           <div>
-            <input type="submit" name="submit" value="Submit Form">
-            &nbsp;
-            <input type="reset" name="reset" value="Reset Form">
+            <div class="block clear">
+              <label for="comment">Your Comment</label>
+              <textarea name="comment" id="comment" cols="25" rows="10"></textarea>
+            </div>
+            <div>
+              <input type="submit" id="submit" value="Add Comment"
+                    onclick="addComment('<?php echo $this->baseUrl('ajax/add-comment'); ?>', <?php echo $idUser; ?>, <?php echo $idProduct; ?>)">
+            </div>
           </div>
-        </form>
+        <?php else: ?>
+          <h1 style="color:#f00;">コメントの投稿はログインが必要です。</h1>
+        <?php endif; ?>
       </div>
       <!-- ################################################################################################ -->
     </div>
