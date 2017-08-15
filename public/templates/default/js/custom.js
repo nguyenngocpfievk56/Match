@@ -29,6 +29,7 @@ function addComment(url, idUser, idProduct){
     },
     function(data, status){
       $("#comments-list").append(data);
+      $("#comment").val('');
     });
 }
 
@@ -43,4 +44,37 @@ function like(likeButton, url, idComment, likesTag) {
       event.preventDefault();
     }
   });
+}
+
+function subCommentToggle(toggleBtn, subCommentDiv){
+  if (toggleBtn.text() == 'hide'){
+    toggleBtn.html('show');
+    subCommentDiv.hide();
+  } else {
+    toggleBtn.html('hide');
+    subCommentDiv.show();
+  }
+}
+
+function replyToggle(toggleBtn, replyDiv){
+  if (toggleBtn.text() == 'reply'){
+    toggleBtn.html('cancel');
+    replyDiv.show();
+  } else {
+    toggleBtn.html('reply');
+    replyDiv.hide();
+  }
+}
+
+function addSubComment(url, replyDiv, contentArea, idUser, idComment){
+  $.post(url,
+    {
+      content: contentArea.val(),
+      idUser: idUser,
+      idComment: idComment
+    },
+    function(data, status){
+      contentArea.val('');
+      replyDiv.before(data);
+    });
 }

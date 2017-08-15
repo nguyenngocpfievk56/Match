@@ -50,6 +50,9 @@ class ProductController extends MyZend_Controller_Action {
     $commentModel = new Default_Model_Comment();
     $this->view->comments = $commentModel->getCommentsByProduct($this->_arrayParams["id"]);
 
+    $subCommentModel = new Default_Model_SubComment();
+    $this->view->subCommentModel = $subCommentModel;
+
     $userModel = new Default_Model_User();
     $this->view->userModel = $userModel;
   }

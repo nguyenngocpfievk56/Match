@@ -41,6 +41,30 @@
               <div class="comcont">
                 <p><?php echo $item['content']; ?></p>
               </div>
+              <hr>
+              <button id="btnReplyToggle<?php echo $item['id']; ?>" onclick="replyToggle($('#btnReplyToggle<?php echo $item['id']; ?>'), $('#reply<?php echo $item['id']; ?>'))"
+                      class="btn btn-normal" type="button" name="reply" style="padding:8px 16px; color:#000; margin-bottom:10px; font-zise:12px;">reply</button>
+              <button id="btnToggle<?php echo $item['id']; ?>" onclick="subCommentToggle($('#btnToggle<?php echo $item['id']; ?>'), $('#sub-comment<?php echo $item['id']; ?>'))"
+                      class="btn btn-normal" type="button" name="reply" style="padding:8px 16px; color:#000; margin-bottom:10px; font-zise:12px;">show</button>
+
+              <div id="sub-comment<?php echo $item['id']; ?>" style="display: none;">
+                <?php
+                  $subComments = $this->subCommentModel->getSubCommentsByComment($item['id']);
+                  foreach($subComments as $sub):
+                ?>
+                    <blockquote style="margin-left:20px; font-size:14px;">
+                      <p><?php echo $sub['content']; ?></p>
+                      <footer>At <b><cite title="Source Title"><?php echo $sub['time']; ?></cite></b> by <b><cite title="Source Title"><?php echo $sub['name']; ?></cite></b> ( <?php echo $sub['email']; ?> )</footer>
+                    </blockquote>
+                <?php endforeach; ?>
+              </div>
+              
+              <div id="reply<?php echo $item['id']; ?>" class="block clear" style="display: none;">
+                <label for="comment">Your Reply</label>
+                <textarea name="comment" id="comment<?php echo $item['id']; ?>" rows="3"></textarea>
+                <button onclick="addSubComment('<?php echo $this->baseUrl('ajax/add-sub-comment');?>', $('#reply<?php echo $item['id']; ?>'), $('#comment<?php echo $item['id']; ?>'), <?php echo $idUser; ?>, <?php echo $item['id']; ?>)"
+                        type="button" name="button" style="margin-top: 5px;">Reply</button>
+              </div>
             </article>
           </li>
           <?php endforeach; ?>

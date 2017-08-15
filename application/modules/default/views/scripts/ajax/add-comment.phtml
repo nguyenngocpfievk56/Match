@@ -2,6 +2,10 @@
   <article>
     <header>
       <figure class="avatar"><img style="height:32px; width:32px;object-fit:cover;" src="<?php echo $this->commentedUser['img']; ?>" alt=""></figure>
+      <div class="like-block">
+        <a onclick="like(this, '<?php echo $this->baseUrl('ajax/like/id-comment/') . $this->currentComment['id']; ?>',<?php echo $this->currentComment['id']; ?>,$('#<?php echo 'likesTag' . $this->currentComment['id'];?>'))">Likes</a>:
+            <span id="<?php echo 'likesTag' . $this->currentComment['id'];?>"><?php echo $this->currentComment['likes']; ?></span>
+      </div>
       <address>
       By <a><?php echo $this->commentedUser['name']; ?></a> (<?php echo $this->commentedUser['email'];?>)
       </address>

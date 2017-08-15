@@ -16,7 +16,7 @@ class Default_Model_Comment extends Zend_Db_Table {
   }
 
   public function insertNewComment($content, $idUser, $idProduct) {
-    $time = date('Y/m/d h:i:s', time());
+    $time = date('Y/m/d h:i:s a', time());
     $data = array(
       "content"=>$content,
       "time"=>$time,

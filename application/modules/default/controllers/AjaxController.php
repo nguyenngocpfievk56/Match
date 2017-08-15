@@ -31,4 +31,15 @@ class AjaxController extends Zend_Controller_Action {
 
     echo $likes;
   }
+
+  protected function addSubCommentAction() {
+    $subcommentModel = new Default_Model_SubComment();
+    $idSubComment = $subcommentModel->insertNewComment($this->_arrayParams['content'], $this->_arrayParams['idUser'], $this->_arrayParams['idComment']);
+    $subComment = $subcommentModel->getSubCommentById($idSubComment);
+
+    $this->view->time = $subComment['time'];
+    $this->view->content = $subComment['content'];
+    $this->view->name = $subComment['name'];
+    $this->view->email = $subComment['email'];
+  }
 }
