@@ -9,8 +9,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap{
 
       $db = Zend_Db::factory($adapter, $config);
       $db->setFetchMode(Zend_Db::FETCH_ASSOC);
-      $db->query("SET NAMES 'utf8'");
-      $db->query("SET CHARACTER SET 'utf8'");
 
       Zend_Registry::set("db", $db);
       Zend_Db_Table::setDefaultAdapter($db);

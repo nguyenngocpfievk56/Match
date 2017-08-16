@@ -77,3 +77,8 @@ iframe {
   margin: 8px;
   font-size: 15px;
 }
+
+.textProductName {
+  height: 110px;
+  overflow: hidden;
+}

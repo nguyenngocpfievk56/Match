@@ -29,6 +29,15 @@ class Default_Model_Product extends Zend_Db_Table {
     return $db->fetchOne($select);
   }
 
+  public function getRelationProduct($idProduct, $idCategory, $amount) {
+    $select = $this->select()
+                  ->where('id <> ?', $idProduct, INTEGER)
+                  ->where('idCat = ?', $idCategory, INTEGER)
+                  ->order(new Zend_Db_Expr('RAND()'))
+                  ->limit($amount);
+    return $this->fetchAll($select)->toArray();
+  }
+
   public function searchProductsByKeyword() {
 
   }
@@ -38,6 +47,6 @@ class Default_Model_Product extends Zend_Db_Table {
   }
 
   public function insertNewProduct() {
-    
+
   }
 }

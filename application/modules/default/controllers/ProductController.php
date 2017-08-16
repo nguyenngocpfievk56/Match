@@ -45,7 +45,9 @@ class ProductController extends MyZend_Controller_Action {
     $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
 
     $productModel = new Default_Model_Product();
-    $this->view->productInfo = $productModel->getProductById($this->_arrayParams["id"]);
+    $productInfo = $productModel->getProductById($this->_arrayParams["id"]);
+    $this->view->productInfo = $productInfo;
+    $this->view->relation = $productModel->getRelationProduct($productInfo[id], $productInfo['idCat'], 4);
 
     $commentModel = new Default_Model_Comment();
     $this->view->comments = $commentModel->getCommentsByProduct($this->_arrayParams["id"]);
@@ -55,10 +57,6 @@ class ProductController extends MyZend_Controller_Action {
 
     $userModel = new Default_Model_User();
     $this->view->userModel = $userModel;
-  }
-
-  protected function recommendationAction() {
-    $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
   }
 
   protected function searchAction() {

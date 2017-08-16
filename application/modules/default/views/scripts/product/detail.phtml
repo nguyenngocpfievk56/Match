@@ -31,7 +31,8 @@
               <header>
                 <figure class="avatar"><img style="height:32px; width:32px;object-fit:cover;" src="<?php echo $commentedUser['img']; ?>" alt=""></figure>
                 <div class="like-block">
-                  <a onclick="like(this, '<?php echo $this->baseUrl('ajax/like/id-comment/') . $items['id']; ?>',<?php echo $item['id']; ?>,$('#<?php echo 'likesTag' . $item['id'];?>'))">Likes</a>: <span id="<?php echo 'likesTag' . $item['id'];?>"><?php echo $item['likes']; ?></span>
+                  <a onclick="like(this, '<?php echo $this->baseUrl('ajax/like/id-comment/') . $items['id']; ?>',<?php echo $item['id']; ?>,$('#<?php echo 'likesTag' . $item['id'];?>'))">Likes</a>:
+                  <span id="<?php echo 'likesTag' . $item['id'];?>"><?php echo $item['likes']; ?></span>
                 </div>
                 <address>
                 By <a><?php echo $commentedUser['name']; ?></a> (<?php echo $commentedUser['email'];?>)
@@ -58,13 +59,18 @@
                     </blockquote>
                 <?php endforeach; ?>
               </div>
-              
+
               <div id="reply<?php echo $item['id']; ?>" class="block clear" style="display: none;">
-                <label for="comment">Your Reply</label>
-                <textarea name="comment" id="comment<?php echo $item['id']; ?>" rows="3"></textarea>
-                <button onclick="addSubComment('<?php echo $this->baseUrl('ajax/add-sub-comment');?>', $('#reply<?php echo $item['id']; ?>'), $('#comment<?php echo $item['id']; ?>'), <?php echo $idUser; ?>, <?php echo $item['id']; ?>)"
-                        type="button" name="button" style="margin-top: 5px;">Reply</button>
+                <?php if ($this->loggedIn): ?>
+                  <label for="comment">Your Reply</label>
+                  <textarea name="comment" id="comment<?php echo $item['id']; ?>" rows="3"></textarea>
+                  <button onclick="addSubComment('<?php echo $this->baseUrl('ajax/add-sub-comment');?>', $('#reply<?php echo $item['id']; ?>'), $('#comment<?php echo $item['id']; ?>'), <?php echo $idUser; ?>, <?php echo $item['id']; ?>)"
+                          type="button" name="button" style="margin-top: 5px;">Reply</button>
+                <?php else: ?>
+                  <span style="color:#f00;">コメントの投稿はログインが必要です。</span>
+                <?php endif; ?>
               </div>
+
             </article>
           </li>
           <?php endforeach; ?>
@@ -90,6 +96,30 @@
     </div>
     <!-- ################################################################################################ -->
     <!-- / main body -->
-    <div class="clear"></div>
+    <hr>
+    <div class="wrapper row3">
+      <section class="hoc clear">
+        <!-- ################################################################################################ -->
+        <div class="center">
+          <h2 class="heading">気になるような商品</h2>
+        </div>
+        <ul class="nospace elements">
+          <?php foreach($this->relation as $r):?>
+            <li class="one_quarter">
+              <article>
+                <a href="<?php echo $this->baseUrl('product/detail/idcat/' . $r['idCat'] . '/page/1/id/' . $r['id']); ?>">
+                  <img src="<?php echo $r['img']; ?>">
+                </a>
+                <div class="txtwrap">
+                  <p class="textProductName"><?php echo $r['name']; ?></p>
+                  <footer><a href="<?php echo $this->baseUrl('product/detail/idcat/' . $r['idCat'] . '/page/1/id/' . $r['id']); ?>">Read More &raquo;</a></footer>
+                </div>
+              </article>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+        <!-- ################################################################################################ -->
+      </section>
+    </div>
   </main>
 </div>

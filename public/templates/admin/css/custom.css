@@ -21,3 +21,8 @@ iframe {
 .create-account-ifame {
   height: 290px;
 }
+
+.textProductName {
+  height: 200px;
+  overflow: hidden;
+}
