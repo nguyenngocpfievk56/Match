@@ -9,7 +9,7 @@ class Default_Model_Recommendation extends Zend_Db_Table {
                 ->from('recommendation as r')
                 ->where('u.id = ?', $idUser, INTEGER)
                 ->join('product as d', 'd.id = r.idProduct')
-                ->join('user as u', 'r.idUser = u.id', array('u.id'));
+                ->join('user as u', 'r.idUser = u.id', array('u.id as idUser'));
 
     return $db->fetchAll($select);
   }

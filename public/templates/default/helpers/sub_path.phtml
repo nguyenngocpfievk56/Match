@@ -10,10 +10,17 @@
         if ($this->arrayParams['action'] == 'profile') {
           echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">プロフィール</a></li>';
         } elseif ($this->arrayParams['action'] == 'detail') {
-          echo '<li><a style="font-size:15px; font-weight: bold;" href="' . $this->baseUrl('/product/list/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page']) . '">商品一覧</a></li>';
-          echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品詳細</a></li>';
-        } elseif ($this->arrayParams['controller'] == 'product'){
+          if ($this->arrayParams['type'] == 'search'){
+            echo '<li><a style="font-size:15px; font-weight: bold;" href="' . $this->baseUrl('/product/search') . '">商品検索</a></li>';
+            echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品詳細</a></li>';
+          } else {
+            echo '<li><a style="font-size:15px; font-weight: bold;" href="' . $this->baseUrl('/product/list/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page']) . '">商品一覧</a></li>';
+            echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品詳細</a></li>';
+          }
+        } elseif ($this->arrayParams['action'] == 'list'){
           echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品一覧</a></li>';
+        } elseif ($this->arrayParams['action'] == 'search') {
+          echo '<li><a style="font-size:15px; font-weight: bold; color: #00ff5a;">商品検索</a></li>';
         }
       ?>
     </ul>

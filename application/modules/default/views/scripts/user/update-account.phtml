@@ -1,5 +1,5 @@
 <?php
-  $sexData = array('Male', 'Female', 'Other');
+  $sexData = array(1=>'Male', 2=>'Female', 3=>'Other');
   $sexRadio = $this->formRadio('sex', 0, array('style'=>'margin:7px;'), $sexData, "");
 ?>
 
@@ -41,30 +41,30 @@
 </form>
 <?php else: ?>
 <div class="confirm-userinfo">
-  <img style="margin: 7px; height: 80px; width: 80px; object-fit: cover;" src="<?php echo $this->infor[0]['img']; ?>" alt=""><br>
+  <img style="margin: 7px; height: 80px; width: 80px; object-fit: cover;" src="<?php echo $this->infor['img']; ?>" alt=""><br>
   <table>
     <tr>
       <td class="td-label">Username:</td>
-      <td class="td-info"><?php echo $this->infor[0]['username']; ?></td>
+      <td class="td-info"><?php echo $this->infor['username']; ?></td>
     </tr>
     <tr>
       <td class="td-label">Name:</td>
-      <td class="td-info"><?php echo $this->infor[0]['name']; ?></td>
+      <td class="td-info"><?php echo $this->infor['name']; ?></td>
     </tr>
     <tr>
       <td class="td-label">Email:</td>
-      <td class="td-info"><?php echo $this->infor[0]['email']; ?></td>
+      <td class="td-info"><?php echo $this->infor['email']; ?></td>
     </tr>
     <tr>
       <td class="td-label">Sex:</td>
       <td class="td-info">
       <?php
-        switch ($this->infor[0]['sex']) {
-          case 0:
-            echo "Male";
-            break;
+        switch ($this->infor['sex']) {
           case 1:
             echo "Male";
+            break;
+          case 2:
+            echo "Female";
             break;
           default:
             echo "Other";

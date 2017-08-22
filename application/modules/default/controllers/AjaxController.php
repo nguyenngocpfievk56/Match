@@ -42,4 +42,15 @@ class AjaxController extends Zend_Controller_Action {
     $this->view->name = $subComment['name'];
     $this->view->email = $subComment['email'];
   }
+
+  protected function changePasswordAction() {
+    $this->_helper->viewRenderer->setNoRender(TRUE);
+    $userModel = new Default_Model_User();
+    if ($userModel->checkPasswordById($this->_arrayParams['id'], md5($this->_arrayParams['currentPassword']))){
+      $userModel->updateAccount($this->_arrayParams['id'], array ('password' => md5($this->_arrayParams['newPassword'])));
+      echo "success";
+    } else {
+      echo "fail";
+    }
+  }
 }

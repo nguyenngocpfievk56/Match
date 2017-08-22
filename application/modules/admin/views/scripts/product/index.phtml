@@ -1,0 +1,77 @@
+<?php $url = $this->baseUrl("admin/product/index/idcat/"); ?>
+<div class="container" style="padding: 20px 0px;">
+  <div class="col-sm-3">
+    <h3>カテゴリー</h3>
+    <nav class="sdb_holder">
+      <ul>
+        <?php
+          for($i=0; $i<sizeof($this->categoriesData); $i++):
+            if($this->categoriesData[$i]['id'] == $this->arrayParams["idcat"]):
+              $currentCategory = $this->categoriesData[$i]['name'];
+        ?>
+              <li><a style="color:#f00;" href="<?php echo $url . $this->categoriesData[$i]['id'] . "/page/1"; ?>"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
+        <?php
+            else:
+        ?>
+              <li><a href="<?php echo $url . $this->categoriesData[$i]['id'] . "/page/1"; ?>"><?php echo $this->categoriesData[$i]['name']; ?></a></li>
+        <?php
+            endif;
+          endfor;
+        ?>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-sm-9">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Configs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          $i = 0;
+          foreach ($this->productData as $p):
+            $i++;
+        ?>
+        <tr>
+          <td><?php echo $i; ?></td>
+          <td><a href="<?php echo $this->baseUrl('/admin/product/view/idcat/') . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>">
+            <?php echo $p['name']; ?></a></td>
+          <td><img src="<?php echo $p['img'] ?>" style="width: 60px; height: 60px;"></td>
+          <td style="text-align: center;">
+            <?php
+              if ($p['deleted'] == ''):
+            ?>
+                <a href="<?php echo $this->baseUrl('admin/product/delete') . '/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>"><img src="./images/active.png" alt=""></a>
+            <?php
+              else:
+            ?>
+                <a href="<?php echo $this->baseUrl('admin/product/reactive') . '/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>"><img src="./images/deleted.png" alt=""></a>
+            <?php
+              endif;
+            ?>
+          </td>
+          <td style="width: 80px; text-align: center;">
+            <a href="<?php echo $this->baseUrl('/admin/product/view/idcat/') . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>">
+              <img src="./images/info.png" alt=""></a>
+            <a href="<?php echo $this->baseUrl('admin/product/update') . '/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>"><img src="./images/edit.png" alt=""></a>
+            <a href="<?php echo $this->baseUrl('admin/product/delete') . '/idcat/' . $this->arrayParams['idcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $p['id']; ?>">
+              <img src="./images/delete.png" alt=""></a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="pagination">
+    <?php
+      echo $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array("url"=>$url . $this->arrayParams["idcat"] . "/page/"));
+    ?>
+  </nav>
+</div>

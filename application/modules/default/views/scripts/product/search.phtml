@@ -1,0 +1,43 @@
+<?php
+  $urlLinkDetail = $this->baseUrl("product/detail/type/search" . "/id/");
+?>
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    <div class="content">
+      <!-- ################################################################################################ -->
+      <div id="gallery">
+        <figure>
+          <header class="heading" style="display: inline-block;">商品検索</header>
+          <form action="" method="post">
+            <input type="text" style="height: 35px; width: 500px;" name="search-word" placeholder="検索キーワード" value="<?php echo $this->keyword; ?>">
+            <input type="submit" name="submit" value="submit" hidden="true">
+          </form>
+
+          <hr>
+          <ul class="nospace clear">
+            <?php
+            if (count($this->productData) > 0) :
+              for ($i = 0; $i<count($this->productData); $i++) :
+            ?>
+              <li class="one_quarter">
+                <article class="product-case"><a href="<?php echo $urlLinkDetail . $this->productData[$i]['id']; ?>">
+                  <img src="<?php echo $this->productData[$i][img]; ?>"></a>
+                  <div class="txtwrap">
+                    <h6 class="heading product-name"><?php echo $this->productData[$i]["name"]; ?></h6>
+                    <footer><a href="<?php echo $urlLinkDetail . $this->productData[$i]['id']; ?>">Read More &raquo;</a></footer>
+                  </div>
+                </article>
+              </li>
+            <?php
+              endfor;
+            else :
+            ?>
+              <h2>条件があってる物はありません</h2>
+            <?php endif; ?>
+          </ul>
+        </figure>
+      </div>
+      <!-- ################################################################################################ -->
+    </div>
+  </main>
+</div>

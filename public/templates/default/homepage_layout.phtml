@@ -22,8 +22,8 @@
     <article>
       <div class="introtxt">
         <h2 class="heading">何を探しているの</h2>
-				<form class="" action="<?php $this->baseUrl('/product/list') ?>" method="post">
-					<input class="btn" href="#" placeholder="ここに入力して検索を" id="searchBox" type="text"></input><br/>
+				<form class="" action="<?php echo $this->baseUrl('/product/search/page/1');?>" method="post">
+					<input class="btn" name="search-word" placeholder="ここに入力して検索を" id="searchBox" type="text"></input><br/>
 					<input class="btn" value="検索" type="submit"></input>
 				</form>
       </div>

@@ -1,0 +1,36 @@
+<div class="container" style="padding: 10px;">
+  <h1 style="text-align: center;">歴史</h1>
+  <hr>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Product</th>
+        <th>Time</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        $i = 0;
+        foreach ($this->history as $h):
+          $i++;
+      ?>
+      <tr>
+        <td><?php echo $i; ?></td>
+        <td><?php echo $h['username']; ?></td>
+        <td><a href="<?php echo $this->baseUrl('/admin/product/view/id/') . $h['id']; ?>"><?php echo $h['name']; ?></a></td>
+        <td><?php echo $h['time']; ?></td>
+        <td><?php echo $h['type']; ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <nav class="pagination">
+    <?php
+      echo $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array("url"=>$this->baseUrl('admin/history/index/page/')));
+    ?>
+  </nav>
+</div>

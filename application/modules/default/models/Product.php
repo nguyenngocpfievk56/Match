@@ -8,6 +8,7 @@ class Default_Model_Product extends Zend_Db_Table {
     $select = $db->select()
                 ->from("product")
                 ->where("idCat = ?", $idCat, INTEGER)
+                ->where("deleted = ?", "")
                 ->limitPage($page,$countPerPage);
     return $db->fetchAll($select);
   }
@@ -16,7 +17,8 @@ class Default_Model_Product extends Zend_Db_Table {
     $db = Zend_Registry::get("db");
     $select = $db->select()
                 ->from("product")
-                ->where("id = ?", $id);
+                ->where("id = ?", $id)
+                ->where("deleted = ?", "");
     return $db->fetchRow($select);
   }
 
@@ -24,6 +26,7 @@ class Default_Model_Product extends Zend_Db_Table {
     $db = Zend_Registry::get("db");
     $select = $db->select()
                 ->from("product", array("COUNT(id) as itemCount"))
+                ->where("deleted = ?", "")
                 ->where("idCat = ?", $idCategory, INTEGER);
 
     return $db->fetchOne($select);
@@ -33,20 +36,22 @@ class Default_Model_Product extends Zend_Db_Table {
     $select = $this->select()
                   ->where('id <> ?', $idProduct, INTEGER)
                   ->where('idCat = ?', $idCategory, INTEGER)
+                  ->where("deleted = ?", "")
                   ->order(new Zend_Db_Expr('RAND()'))
                   ->limit($amount);
     return $this->fetchAll($select)->toArray();
   }
 
-  public function searchProductsByKeyword() {
+  public function searchProductsByKeyword($keyword) {
+    if (empty($keyword)){
+      return null;
+    }
 
-  }
+    $select = $this->select()
+                  ->where('description LIKE ?', '%' . $keyword . '%')
+                  ->where("deleted = ?", "")
+                  ->limit(20);
 
-  public function deleteProductById() {
-
-  }
-
-  public function insertNewProduct() {
-
+    return $this->fetchAll($select)->toArray();
   }
 }

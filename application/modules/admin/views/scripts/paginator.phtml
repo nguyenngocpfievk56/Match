@@ -1,0 +1,24 @@
+<?php
+if (isset($this->previous)){
+  $paginatorCode = '<li><a href="' . $this->url . $this->previous . '">&laquo; Previous</a></li>';
+}
+if ($this->firstPageInRange > $this->first){
+  $paginatorCode .= '<li><strong>&hellip;</strong></li>';
+}
+foreach ($this->pagesInRange as $key) {
+  if ($key == $this->current){
+    $paginatorCode .= '<li class="current"><strong>' . $key . '</strong></li>';
+  } else {
+    $paginatorCode .= '<li><a href="' . $this->url . $key . '">' . $key . '</a></li>';
+  }
+}
+if ($this->lastPageInRange < $this->last){
+  $paginatorCode .= '<li><strong>&hellip;</strong></li>';
+}
+if (isset($this->next)){
+  $paginatorCode .= '<li><a href="' . $this->url . $this->next . '">Next &raquo;</a></li>';
+}
+?>
+<ul>
+  <?php echo $paginatorCode; ?>
+</ul>

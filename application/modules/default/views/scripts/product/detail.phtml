@@ -9,7 +9,7 @@
       <!-- ################################################################################################ -->
       <h1>商品の情報</h1><hr>
       <div style="display: inline-block; width: 100%; text-align: center;">
-        <img style="height:auto; width:auto;" src="<?php echo $this->productInfo['img']; ?>" alt="">
+        <img style="height:400px; width:400px;" src="<?php echo $this->productInfo['img']; ?>" alt="">
       </div>
       <div style="display: inline-block; text-align: center; width: 100%; margin-top: 20px;">
         <h1 style="display: inline-block; width: 70%; color: #000;"><?php echo $this->productInfo['name']; ?></h1>
@@ -101,7 +101,7 @@
       <section class="hoc clear">
         <!-- ################################################################################################ -->
         <div class="center">
-          <h2 class="heading">気になるような商品</h2>
+          <h2 class="heading">これと関係のある商品</h2>
         </div>
         <ul class="nospace elements">
           <?php foreach($this->relation as $r):?>

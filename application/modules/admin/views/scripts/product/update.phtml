@@ -1,0 +1,42 @@
+<div class="container" style="padding: 10px 0px;">
+  <h1 style="text-align: center;">商品修正</h1>
+  <hr>
+  <form method="post" action="" style="padding: 0px 10%;" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>品名</label>
+      <input type="text" class="form-control" name="name" placeholder="品名" value="<?php echo $this->productInfo['name'] ?>">
+    </div>
+
+    <div class="form-group">
+      <label>詳細</label>
+      <textarea name="description" id="description" rows="10" cols="80">
+        <?php echo $this->productInfo['description']; ?>
+      </textarea>
+      <script>
+        CKEDITOR.replace( 'description' );
+      </script>
+    </div>
+
+    <div class="form-group">
+      <label>種類</label>
+      <select class="form-control" name="category">
+        <?php foreach($this->categoriesData as $c):?>
+          <option value="<?php echo $c['id'] ?>" <?php if ($c['id'] == $this->productInfo['idCat']) echo "selected"; ?>><?php echo $c['name']; ?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>画像</label>
+      <img style="height: 200px; width: 200px; object-fit: cover;" id="imgAvatar" src="<?php echo $this->productInfo['img']; ?>">
+      <input onchange="updateImage(this)" type="file" name="product" class="form-control"
+               style="float: right; width: 60%;">
+    </div>
+
+    <hr>
+    <button type="submit" class="btn btn-default">保存</button>
+    <a href="<?php echo $this->baseUrl('admin/product/update/idcat/' . $this->arrayParams['iadcat'] . '/page/' . $this->arrayParams['page'] . '/id/' . $this->arrayParams['id']); ?>">
+      <button type="button" class="btn btn-default">クリア</button>
+    </a>
+  </form>
+</div>

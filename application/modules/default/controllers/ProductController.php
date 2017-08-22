@@ -21,8 +21,8 @@ class ProductController extends MyZend_Controller_Action {
     $this->view->currentUser = $currentUser;
 
     $this->_arrayParams = $this->_request->getParams();
-    $this->paginatorAttr["currentPageNumber"] = $this->_request->getParam("page");
     $this->view->arrayParams = $this->_arrayParams;
+    $this->paginatorAttr["currentPageNumber"] = $this->_request->getParam("page");
   }
 
   protected function listAction() {
@@ -35,8 +35,7 @@ class ProductController extends MyZend_Controller_Action {
     $categories = new Default_Model_Category();
     $this->view->categoriesData = $categories->listCategories();
 
-    $productTable = new Default_Model_Product();
-    $itemCount = $productTable->getCountOfProductByCategory($this->_arrayParams["idcat"]);
+    $itemCount = $productModel->getCountOfProductByCategory($this->_arrayParams["idcat"]);
 
     $this->view->paginator = MyZend_Utils_Paginator::createPaginator($itemCount, $this->paginatorAttr);
   }
@@ -61,5 +60,16 @@ class ProductController extends MyZend_Controller_Action {
 
   protected function searchAction() {
     $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
+    $searchSession = new Zend_Session_Namespace('Zend_Form_Search');
+    $productModel = new Default_Model_Product();
+
+    if ($this->_request->isPost()) {
+      $params = $this->_request->getParams();
+      $this->view->keyword = $params['search-word'];
+      $searchSession->searchWord = $params['search-word'];
+      $this->view->productData = $productModel->searchProductsByKeyword($searchSession->searchWord);
+    } else {
+      $this->view->productData = $productModel->searchProductsByKeyword($searchSession->searchWord);
+    }
   }
 }

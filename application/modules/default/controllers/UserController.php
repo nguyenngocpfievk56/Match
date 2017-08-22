@@ -5,8 +5,7 @@ class UserController extends MyZend_Controller_Action {
 
   public function init(){
     parent::init();
-    $auth = Zend_Auth::getInstance();
-    if ($auth->hasIdentity()){
+    if (Zend_Auth::getInstance()->hasIdentity()){
       $this->view->loggedIn = true;
     } else {
       $this->view->loggedIn = false;
@@ -19,10 +18,49 @@ class UserController extends MyZend_Controller_Action {
 
   protected function profileAction(){
       $this->loadTemplate(TEMPLATE_PATH . "/default", "template.ini", "sub");
+      $userAuth = get_object_vars(Zend_Auth::getInstance()->getIdentity());
 
-      $user = get_object_vars(Zend_Auth::getInstance()->getIdentity());
-
+      $userTable = new Default_Model_User();
+      $user = $userTable->getUserById($userAuth['id']);
       $this->view->user = $user;
+
+      if ($this->_request->isPost()){
+        $params = $this->_request->getParams();
+
+        $updateData = [];
+        if (!empty($params['name'])){
+          $updateData['name'] = $params['name'];
+        }
+
+        if (!empty($params['email'])){
+          $updateData['email'] = $params['email'];
+        }
+
+        $updateData['sex'] = $params['sex'];
+
+        $upload = new Zend_File_Transfer_Adapter_Http();
+        $file = $upload->getFileInfo();
+
+        if (!empty($file['avatar']['name'])){
+          $ext = MyZend_Utils_Utils::getExtension($file['avatar']['name']);
+          $newFileName = 'avatar_' . $user['id'] . '.' . $ext;
+
+          $upload ->setDestination(FILES_PATH . '/img');
+          $upload->addFilter('Rename', array('target'=> FILES_PATH . '/img/' . $newFileName, 'overwrite'=>true));
+          if ($upload->isValid()){
+            $upload->receive();
+            $updateData['img'] = $this->view->baseUrl(UPLOAD_IMAGES_URL . $newFileName);
+          } else {
+            echo "Can not upload image, do it again pls!";
+          }
+        }
+
+        if (!empty($updateData)){
+          $userTable->updateAccount($user['id'], $updateData);
+          $user = $userTable->getUserById($userAuth['id']);
+          $this->view->user = $user;
+        }
+      }
   }
 
   protected function createAccountAction(){
@@ -67,7 +105,7 @@ class UserController extends MyZend_Controller_Action {
       if ($this->_arrayParams['submit'] === 'ok') {
         $upload = new Zend_File_Transfer_Adapter_Http();
         $file = $upload->getFileInfo();
-        $ext = $this->_getExtension($file['avatar']['name']);
+        $ext = MyZend_Utils_Utils::getExtension($file['avatar']['name']);
 
         $newFileName = 'avatar_' . $userId . '.' . $ext;
 
@@ -96,9 +134,4 @@ class UserController extends MyZend_Controller_Action {
     $this->loadTemplate(TEMPLATE_PATH . "/default","template.ini","blank");
   }
 
-  private function _getExtension($filename){
-    $filename = strtolower($filename);
-    $temp = explode('.', $filename);
-    return $temp[count($temp) - 1];
-  }
 }

@@ -1,13 +1,39 @@
+<?php
+  $sexData = array(1=>'Male', 2=>'Female', 3=>'Other');
+  $sexRadio = $this->formRadio('sex', $this->user['sex'], array('style'=>'margin:7px;display: inline-block;'), $sexData, "");
+?>
+
 <div class="wrapper">
   <section class="hoc container clear">
     <div class="content">
       <h1>プロフィール管理</h1>
       <table>
         <tr>
-          <td>Avatar</td>
+          <td style="width: 20%;">Avatar</td>
           <td>
             <img style="float: left; margin-right: 20px;height: 80px; width: 80px; object-fit: cover;"
-                 src="<?php echo $this->baseUrl($this->user['img']);?>">
+                 src="<?php echo $this->baseUrl($this->user['img']) . '?' . time();?>">
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>
+            <div id='change-div'>
+              <button type="button" onClick="openPasswordChangeForm()">Change</button>
+            </div>
+            <div id='save-div' hidden>
+              <button type="button" id='save' style="display: inline-block;" onClick="changePassword('<?php echo $this->baseUrl('ajax/change-password')?>', <?php echo $this->user['id']?>)">Save</button>
+              <button type="button" id='cancel' style="display: inline-block;" onClick="closePasswordChangeForm()">Cancel</button>
+            </div>
+            <div id="password-change-div" style="margin-top: 5px;" hidden>
+              <input type="text" id="new" style="display: inline-block;" placeholder="New">
+              <input type="text" id="confirm" style="display: inline-block;" placeholder="Confirm">
+              <input type="text" id="current" style="display: inline-block;" placeholder="Current">
+              <div id="fail-div" hidden>
+                <span class="label label-danger">Wrong password</span>
+              </div>
+            </div>
+
           </td>
         </tr>
         <tr>
@@ -26,10 +52,10 @@
           <td>性別</td>
           <td><?php
             switch ($this->user['sex']) {
-              case 0:
+              case 1:
                 echo "男";
                 break;
-              case 1:
+              case 2:
                 echo "女";
                 break;
               default:
@@ -40,7 +66,49 @@
         </tr>
       </table>
 
-      <input class="btn" style="color: #000000;" type="submit" name="change" value="修正">
+      <input class="btn" style="color: #000000;" type="submit" name="change" value="個人情報修正" onClick="openUpdateForm()">
+      <br>
+
+      <div id="update-form" hidden>
+        <hr>
+        <h1>情報修正</h1>
+        <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Avatar</label>
+            <div class="col-sm-10">
+              <img style="height: 80px; width: 80px; object-fit: cover;" id="imgAvatar" src="<?php echo $this->baseUrl('public/templates/default/images/80x80.png') ?>" alt="">
+              <input onchange="updateAvatar(this)" type="file" name="avatar" class="form-control"
+                     style="float: right; width: 250px; right: 0;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Sex</label>
+            <div class="col-sm-10">
+              <?php echo $sexRadio ?>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" name="submit" value="保存" class="btn btn-default"/>
+              <input type="button" value="キャンセル" class="btn btn-default" onClick="openUpdateForm()"/>
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
   </section>
 </div>

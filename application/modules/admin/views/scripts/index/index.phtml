@@ -1,50 +1,141 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Match - 管理画面</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">ログイン <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">商品管理</a></li>
-        <li><a href="#">履歴</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+<?php if ($this->auth == NOT_LOGIN_YET):
+  $user = null;
+  if ($this->savedUser !== null){
+    $user = explode('|', $this->savedUser);
+  }
+?>
 <div class="container">
   <div class="row">
     <h3 style="text-align: center;">ログイン</h3>
   </div>
   <hr>
   <div class="row">
-    <div class="col-sm-4">
-
-    </div>
-    <div class="col-sm-4">
-      <form>
+    <div class="col-sm-4 col-sm-offset-4">
+      <form action="" method="post">
         <div class="form-group">
-          <label>Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+          <label>Username</label>
+          <?php if ($user === null): ?>
+            <input type="text" name="username" class="form-control" placeholder="Username" value=""/>
+          <?php else: ?>
+            <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo $user[0]; ?>"/>
+          <?php endif; ?>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <?php if ($user === null): ?>
+            <input type="password" name="password" class="form-control" placeholder="Username" value=""/>
+          <?php else: ?>
+            <input type="password" name="password" class="form-control" placeholder="Username" value="<?php echo $user[1]; ?>"/>
+          <?php endif; ?>
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox">　アカウントを保存する
+            <?php if ($user === null): ?>
+              <input type="checkbox" name="remember" id="remember">　アカウントを保存する
+            <?php else: ?>
+              <input type="checkbox" name="remember" id="remember" checked>　アカウントを保存する
+            <?php endif; ?>
           </label>
         </div>
-        <button type="submit" class="btn btn-default">ログイン</button>
+        <?php echo $this->formSubmit('submit', 'ログイン', array('class'=>'btn btn-default')); ?>
+        <span class="label label-danger" style="font-size: 15px;"><?php echo $this->error; ?></span>
       </form>
-    </div>
-    <div class="col-sm-4">
-
     </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<?php elseif($this->auth == BE_NOT_ADMIN): ?>
+  <div class="container">
+    <div class="row">
+      <h3 style="text-align: center;">無権限</h3>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h1 style="text-align: center;">Hi, <?php echo $this->currentUser->name; ?></h1>
+        <h1 style="text-align: center;">This account is not Admin's Account</h1>
+        <h1 style="text-align: center;">You have to log in as an Admin for going to further!</h1>
+        <a href="<?php echo $this->baseUrl('admin/index/logout'); ?>"><h1 style="text-align: center;">Log out</h1></a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<?php else: ?>
+<div class="container">
+  <h1 style="text-align: center;">Hi, <?php echo $this->currentUser->name; ?></h1>
+  <a href="<?php echo $this->baseUrl('admin/index/logout'); ?>"><h1 style="text-align: center;">Log out</h1></a>
+  <hr>
+  <h1>プロフィール管理</h1>
+  <table>
+    <tr>
+      <td style="width: 20%;">Avatar</td>
+      <td>
+        <img style="float: left; margin-right: 20px;height: 80px; width: 80px; object-fit: cover;"
+             src="<?php echo $this->baseUrl($this->currentUser->img) . '?' . time();?>">
+      </td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>
+        <div id='change-div'>
+          <button type="button" onClick="openPasswordChangeForm()">Change</button>
+        </div>
+        <div id='save-div' hidden>
+          <button type="button" id='save' style="display: inline-block;" onClick="changePassword('<?php echo $this->baseUrl('ajax/change-password')?>', <?php echo $this->currentUser->id;?>)">Save</button>
+          <button type="button" id='cancel' style="display: inline-block;" onClick="closePasswordChangeForm()">Cancel</button>
+        </div>
+        <div id="password-change-div" style="margin-top: 5px;" hidden>
+          <input type="text" id="new" style="display: inline-block;" placeholder="New">
+          <input type="text" id="confirm" style="display: inline-block;" placeholder="Confirm">
+          <input type="text" id="current" style="display: inline-block;" placeholder="Current">
+          <div id="fail-div" hidden>
+            <span class="label label-danger">Wrong password</span>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td><?php echo $this->currentUser->username; ?></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><?php echo $this->currentUser->email; ?></td>
+    </tr>
+    <tr>
+      <td>名前</td>
+      <td><?php echo $this->currentUser->name; ?></td>
+    </tr>
+    <tr>
+      <td>性別</td>
+      <td><?php
+        switch ($this->currentUser->sex) {
+          case 1:
+            echo "男";
+            break;
+          case 2:
+            echo "女";
+            break;
+          default:
+            echo "未定";
+            break;
+        }
+      ?></td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
+<?php endif; ?>
