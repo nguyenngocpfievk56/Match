@@ -6,8 +6,4 @@ class Default_Model_Category extends Zend_Db_Table {
   public function listCategories(){
     return $this->fetchAll()->toArray();
   }
-
-  public function getCategoryById() {
-    
-  }
 }

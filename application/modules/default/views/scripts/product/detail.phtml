@@ -1,6 +1,10 @@
 <?php
   $idUser = $this->currentUser->id;
   $idProduct = $this->arrayParams['id'];
+
+  if ($this->currentUser !== null) {
+      $this->userProductModel->insertNewRelation($idUser, $idProduct);
+  }
 ?>
 <div class="wrapper row3">
   <main class="hoc container clear">

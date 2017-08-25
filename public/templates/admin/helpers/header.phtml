@@ -24,7 +24,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo $this->baseUrl('admin/product/insert'); ?>"><img src="./images/add.png" alt=""></a></li>
+        <?php if ($this->arrayParams['controller'] == 'product'): ?>
+          <li><a onClick="runAI('<?php echo $this->baseUrl('admin/ajax/runai'); ?>')"><img src="./images/learn.png" alt=""></a></li>
+          <li><a href="<?php echo $this->baseUrl('admin/product/insert'); ?>"><img src="./images/add.png" alt=""></a></li>
+        <?php endif; ?>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

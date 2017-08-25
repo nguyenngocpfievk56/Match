@@ -22,6 +22,15 @@ class Default_Model_Product extends Zend_Db_Table {
     return $db->fetchRow($select);
   }
 
+  public function getProductByIds($ids) {
+    $db = Zend_Registry::get("db");
+    $select = $db->select()
+                ->from("product")
+                ->where("id IN (?)", $ids)
+                ->where("deleted = ?", "");
+    return $db->fetchAll($select);
+  }
+
   public function getCountOfProductByCategory($idCategory) {
     $db = Zend_Registry::get("db");
     $select = $db->select()

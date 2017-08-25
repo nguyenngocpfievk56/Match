@@ -40,4 +40,9 @@ class Default_Model_User extends Zend_Db_Table {
 
     return false;
   }
+
+  public function getAllUserID() {
+    $query = $this->select()->from($this->_name, 'id');
+    return $this->fetchAll($query)->toArray();
+  }
 }

@@ -49,3 +49,16 @@ function changePassword(url, idUser){
     }
   }
 }
+
+function runAI(url){
+  alert('AI have been starting!');
+  $.post(
+    url,
+    {
+
+    },
+    function(data, status){
+      alert("AI already be done!")
+    }
+  )
+}
