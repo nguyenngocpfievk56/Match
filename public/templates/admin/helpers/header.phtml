@@ -11,15 +11,15 @@
         <?php if ($this->arrayParams['controller'] == 'product'): ?>
           <li><a href="<?php echo $this->baseUrl('admin/index'); ?>">アカウント</a></li>
           <li class="active"><a href="<?php echo $this->baseUrl('admin/product/index/idcat/19/page/1'); ?>">商品管理</a></li>
-          <li><a href="<?php echo $this->baseUrl('admin/history'); ?>">履歴</a></li>
+          <li><a href="<?php echo $this->baseUrl('admin/history'); ?>">ログ</a></li>
         <?php elseif($this->arrayParams['controller'] == 'index'): ?>
           <li class="active"><a href="<?php echo $this->baseUrl('admin/index'); ?>">アカウント</a></li>
           <li><a href="<?php echo $this->baseUrl('admin/product/index/idcat/19/page/1'); ?>">商品管理</a></li>
-          <li><a href="<?php echo $this->baseUrl('admin/history'); ?>">履歴</a></li>
+          <li><a href="<?php echo $this->baseUrl('admin/history'); ?>">ログ</a></li>
         <?php elseif($this->arrayParams['controller'] == 'history'): ?>
           <li><a href="<?php echo $this->baseUrl('admin/index'); ?>">アカウント</a></li>
           <li><a href="<?php echo $this->baseUrl('admin/product/index/idcat/19/page/1'); ?>">商品管理</a></li>
-          <li class="active"><a href="<?php echo $this->baseUrl('admin/history'); ?>">履歴</a></li>
+          <li class="active"><a href="<?php echo $this->baseUrl('admin/history'); ?>">ログ</a></li>
         <?php endif; ?>
       </ul>
 

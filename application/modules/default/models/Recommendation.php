@@ -7,7 +7,7 @@ class Default_Model_Recommendation extends Zend_Db_Table {
     $db = Zend_Registry::get('db');
     $select = $db->select()
                 ->from('recommendation as r')
-                ->where('u.id = ?', $idUser, INTEGER)
+                ->where('u.id = ?', $idUser, 'INTEGER')
                 ->join('product as d', 'd.id = r.idProduct')
                 ->join('user as u', 'r.idUser = u.id', array('u.id as idUser'))
                 ->order(new Zend_Db_Expr('RAND()'))

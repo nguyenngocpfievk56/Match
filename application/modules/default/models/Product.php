@@ -7,7 +7,7 @@ class Default_Model_Product extends Zend_Db_Table {
     $db = Zend_Registry::get("db");
     $select = $db->select()
                 ->from("product")
-                ->where("idCat = ?", $idCat, INTEGER)
+                ->where("idCat = ?", $idCat, 'INTEGER')
                 ->where("deleted = ?", "")
                 ->limitPage($page,$countPerPage);
     return $db->fetchAll($select);
@@ -36,15 +36,15 @@ class Default_Model_Product extends Zend_Db_Table {
     $select = $db->select()
                 ->from("product", array("COUNT(id) as itemCount"))
                 ->where("deleted = ?", "")
-                ->where("idCat = ?", $idCategory, INTEGER);
+                ->where("idCat = ?", $idCategory, 'INTEGER');
 
     return $db->fetchOne($select);
   }
 
   public function getRelationProduct($idProduct, $idCategory, $amount) {
     $select = $this->select()
-                  ->where('id <> ?', $idProduct, INTEGER)
-                  ->where('idCat = ?', $idCategory, INTEGER)
+                  ->where('id <> ?', $idProduct, 'INTEGER')
+                  ->where('idCat = ?', $idCategory, 'INTEGER')
                   ->where("deleted = ?", "")
                   ->order(new Zend_Db_Expr('RAND()'))
                   ->limit($amount);
